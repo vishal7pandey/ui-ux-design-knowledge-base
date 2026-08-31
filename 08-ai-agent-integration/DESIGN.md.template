@@ -1,0 +1,131 @@
+<!--
+  DESIGN.md TEMPLATE — copy this file to your product repo's root as `DESIGN.md`
+  and fill in the YAML frontmatter with YOUR actual token values.
+
+  DESIGN.md is a cross-agent standard read automatically (or via a one-line
+  Knowledge/instruction pointer) by Claude Code, Cursor, Windsurf, Devin,
+  GitHub Copilot, Cline, Aider, and Codex. Two parts:
+    1. YAML frontmatter — exact machine-readable values (agents parse this for precision)
+    2. Markdown body — human-readable rationale, do's/don'ts, examples
+
+  Delete this comment block once you've customized the file.
+-->
+---
+name: "Your Product Name Design System"
+version: "1.0.0"
+
+colors:
+  primary: "#2563EB"
+  primary-hover: "#1D4ED8"
+  secondary: "#64748B"
+  surface: "#FFFFFF"
+  surface-alt: "#F8FAFC"
+  text-primary: "#1A1A1A"
+  text-secondary: "#525252"
+  text-disabled: "#A3A3A3"
+  border: "#E2E8F0"
+  success: "#16A34A"
+  warning: "#D97706"
+  error: "#DC2626"
+  info: "#2563EB"
+
+dark-mode:
+  background: "#121212"
+  surface-1: "#1E1E1E"
+  surface-2: "#242424"
+  surface-3: "#2C2C2C"
+  text-primary: "#E0E0E0"
+  text-secondary: "#A0A0A0"
+
+typography:
+  font-family-sans: "Inter, system-ui, sans-serif"
+  font-family-mono: "JetBrains Mono, monospace"
+  scale:
+    xs: "0.75rem"
+    sm: "0.875rem"
+    base: "1rem"
+    lg: "1.25rem"
+    xl: "1.5rem"
+    2xl: "1.95rem"
+    3xl: "2.44rem"
+  weights:
+    regular: 400
+    medium: 500
+    semibold: 600
+    bold: 700
+  line-height:
+    tight: 1.25
+    normal: 1.5
+    relaxed: 1.75
+
+spacing:
+  base-unit: "4px"
+  scale: [4, 8, 12, 16, 24, 32, 48, 64]
+
+radius:
+  sm: "4px"
+  md: "8px"
+  lg: "12px"
+  full: "9999px"
+
+shadow:
+  sm: "0 1px 2px rgba(0,0,0,0.05)"
+  md: "0 4px 6px rgba(0,0,0,0.10)"
+  lg: "0 10px 15px rgba(0,0,0,0.10)"
+
+breakpoints:
+  sm: "640px"
+  md: "768px"
+  lg: "1024px"
+  xl: "1280px"
+
+accessibility:
+  min-contrast-text: 4.5
+  min-contrast-large-text: 3.0
+  min-contrast-ui: 3.0
+  min-touch-target: "44px"
+---
+
+# Your Product Name — Design System
+
+> **For AI agents:** read this file completely before generating or modifying any UI component. Every color, spacing, radius, and type value used in generated code must come from the tokens above — never invent a new hex code or arbitrary pixel value. If a component needs a token that isn't defined here, ask before approximating one.
+
+## Design Intent
+
+Describe the aesthetic direction in 2-3 sentences. What should this product *feel* like? (e.g., "Confident and dense — built for expert users making fast decisions across a lot of data. Not playful, not minimal-for-minimalism's-sake.")
+
+## Color Usage Rules
+
+- `primary` — primary CTAs, active nav states, focus rings, links. Nowhere else.
+- `secondary` — supporting/outline buttons, secondary actions.
+- Semantic colors (`success`/`warning`/`error`/`info`) are reserved for their exact meaning — never repurpose `error` red for a decorative accent.
+- Never introduce a color not listed above without updating this file first.
+
+## Typography Usage
+
+- Body text never smaller than `sm` (0.875rem / 14px); prefer `base` (16px) for primary reading content.
+- Headings: `3xl`/Bold → page title, `2xl`/Bold → section title, `xl`/Semibold → subsection, `lg`/Semibold → card title.
+- Max 3 weights in any single view.
+
+## Spacing Rules
+
+- All padding/margin/gap values must come from the spacing scale — never arbitrary values like `13px` or `22px`.
+- Section padding: 32–64px vertical on desktop, 16–24px on mobile.
+
+## Component Conventions
+
+- Every interactive component implements: default, hover, focus-visible, active, disabled states.
+- Icon-only buttons require `aria-label`.
+- Destructive actions require a confirmation step.
+- Loading states use skeletons for content-heavy views, not just a spinner.
+
+## Constraints (Do Not Violate)
+
+- Do not use colors outside the defined palette.
+- Do not hardcode pixel values — always reference the token scale.
+- Do not remove text labels from primary actions for a "cleaner" look — this measurably hurts usability (see `01-design-principles/design-principles.md` in the ui-ux-design knowledge base for the research behind this).
+- Do not skip accessibility attributes (contrast, aria-labels, keyboard nav) to save time.
+
+## Reference
+
+For deeper guidance beyond these tokens (component patterns, UX process, accessibility checklists, agentic UX principles), consult the full `ui-ux-design` knowledge base this template was generated from.

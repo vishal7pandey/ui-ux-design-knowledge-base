@@ -1,0 +1,65 @@
+---
+globs: ["**/*.tsx", "**/*.jsx", "**/*.vue", "**/*.svelte", "**/*.css", "**/*.scss", "**/*.html"]
+excludeGlobs: ["**/*.test.tsx", "**/*.spec.tsx", "**/*.test.jsx", "**/node_modules/**"]
+---
+
+# UI/UX Design Rules
+
+Follow this design system knowledge base for all frontend/UI code. Full depth lives in the sibling `ui-ux-design` repo/folder (`01-design-principles/` through `07-ai-agentic-ux/`) — read the relevant file there before making a non-trivial visual or interaction decision. This file contains the falsifiable, always-apply defaults.
+
+## Precedence Rule
+If this project already defines its own design tokens (CSS variables, a `DESIGN.md`, a `tailwind.config` theme, or a `tokens/` directory), **those values win**. The scales below are fallback defaults for projects that don't have their own system yet — never override an established project convention with these.
+
+## Typography
+- Body text: 16px minimum. Never smaller for body copy.
+- Type scale (1.25 ratio): 12 / 13 / 16 / 20 / 25 / 31 / 39 / 49px
+- Line height: 1.5–1.6× for body text, 1.2–1.3× for headings
+- Max 3 font weights per UI (Regular 400, Semibold 600, Bold 700 covers 95% of needs)
+- Max 2 font families (3 if one is monospace for code)
+- Never use `Inter`, `Roboto`, or `Arial` as a lazy default unless explicitly requested — pick something with intention (see `01-design-principles/typography.md`)
+- Line length: 45–75 characters per line for body text
+
+## Spacing
+- Base unit: 4px. Valid values: 4, 8, 12, 16, 24, 32, 48, 64px — never arbitrary values like 13px or 22px
+- Touch targets: minimum 44×44px on any interactive element for mobile
+- Paragraph spacing ≥ line height
+
+## Color
+- Never introduce a new hex/rgb value inline. Use CSS custom properties / design tokens.
+- Text contrast: minimum 4.5:1 (WCAG AA). Large text (18pt+): minimum 3:1. UI components/icons: minimum 3:1.
+- Never use pure black (#000) on pure white (#FFF) for body text — use near-black (~#1a1a1a) instead.
+- Never convey meaning (error, success, required) through color alone — pair with icon, text, or pattern.
+- Limit palette to: 1 primary + 1 secondary + neutrals + semantic colors (success/warning/error/info). Don't introduce ad-hoc colors outside this set.
+
+## Border Radius & Shadow
+- Pick one radius scale and use it everywhere: sm (4px, inputs/badges) · md (8px, buttons/cards) · lg (12px, modals/panels) · full (9999px, avatars/icon buttons only)
+- Shadows should be subtle and consistent — don't mix arbitrary shadow values across components in the same UI.
+
+## Component Behavior (apply to every interactive element)
+- Every interactive element needs visible states: default, hover, focus-visible, active, disabled — and loading/error where applicable.
+- Focus states must be visible (never `outline: none` without a replacement focus style).
+- Disabled state: reduced opacity (~0.4-0.5) AND `disabled`/`aria-disabled` attribute — visual-only disabling is not enough.
+- Every icon-only button needs an `aria-label`.
+- Destructive actions (delete, remove, cancel with data loss) require a confirmation step.
+- Transitions: 150–250ms ease for hover/state changes; don't animate everything.
+
+## Layout & Responsiveness
+- Mobile-first. Breakpoints: sm 640px / md 768px / lg 1024px / xl 1280px.
+- One primary action per screen/section — avoid competing CTAs of equal visual weight.
+- Design and implement all states: default, loading (skeleton, not just spinner-only for content-heavy views), empty, error — not just the happy path.
+
+## Anti-Patterns — Never Do These
+- Purple gradient on white background as a default "AI-generated" aesthetic
+- Oval/pill buttons used inconsistently with the rest of the button system
+- More than one font weight difference used to imply hierarchy where size/color would be clearer
+- Text below 12px for any reason
+- Justified body text (creates uneven word spacing in digital UI)
+- All-caps for body text or long labels
+- Removing text labels from primary action buttons "to look cleaner"
+- Silent errors — every error state needs a message and a recovery path
+
+## Before Finishing Any UI Task
+Run the output mentally against Nielsen's 10 usability heuristics (full detail in `04-ux-process/heuristic-evaluation.md`): visibility of system status, match with real world, user control/undo, consistency, error prevention, recognition over recall, flexibility, minimalist design, error recovery, help availability.
+
+## Design Judgment
+These are strong defaults, not absolute law. If the user's explicit request, an existing design system, or brand guidelines conflict with a rule here, follow the project's actual context — but flag the deviation rather than silently picking whichever is more convenient.
